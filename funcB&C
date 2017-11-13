@@ -1,0 +1,28 @@
+ENTRY
+		;		fuction b calling function c
+START
+		
+		BL		FUNCTIONB
+		END
+		
+FUNCTIONC
+		STR		R3, [SP, #-4]!		
+		ADD		R3,  R1,  R2
+		MOV		R0,  R3     ; PUT RETURN VALUE IN R0
+		LDR		R3, [SP],  #4
+		MOV		PC, LR
+		
+		
+FUNCTIONB
+		MOV		R4, #7
+		MOV		R5, #5
+		CMP		R4, R5
+		MOV		R1, R4
+		MOV		R2, R5
+		BGT		FUNCTIONC
+		MOV		R0, #10
+		MOV		PC, LR
+STOP
+		
+		END
+		
